@@ -1,3 +1,4 @@
+// G-Colou · criado por Vitor Macedo (https://vitormacedobr.vercel.app) · licença MIT
 // Funções puras: ler o feed do Gmail, achar o código e comparar remetente com o site.
 // Service worker não tem DOMParser, então o feed é lido com regex.
 

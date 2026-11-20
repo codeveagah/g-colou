@@ -1,3 +1,4 @@
+// G-Colou · criado por Vitor Macedo (https://vitormacedobr.vercel.app) · licença MIT
 import { parseFeed, extractCode, sameSite, senderLabel, senderDomain } from "./lib.js";
 
 // Lê o feed do Gmail com o login que a pessoa já tem no Chrome. Nada sai do navegador.

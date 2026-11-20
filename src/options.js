@@ -1,3 +1,4 @@
+// G-Colou · criado por Vitor Macedo (https://vitormacedobr.vercel.app) · licença MIT
 const DEFAULTS = { enabled: true, autoCopy: false, side: "right", name: "", pos: null };
 const $ = (id) => document.getElementById(id);
 const saved = $("saved");

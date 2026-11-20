@@ -5,5 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test"
-  }
+  },
+  "author": "Vitor Macedo (https://vitormacedobr.vercel.app)",
+  "license": "MIT"
 }

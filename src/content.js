@@ -1,3 +1,4 @@
+// G-Colou · criado por Vitor Macedo (https://vitormacedobr.vercel.app) · licença MIT
 // Roda em toda página: pede ao service worker para ler o Gmail e mostra o card com o código.
 (() => {
   if (window.top !== window) return; // só na página principal, não em iframes
