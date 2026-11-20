@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseFeed, extractCode, sameSite, baseDomain, senderLabel, decode } from "../src/lib.js";
+import { parseFeed, extractCode, sameSite, baseDomain, senderLabel, decode, gmailLink, feedAccount, isMagicLink } from "../src/lib.js";
 
 // [assunto, prévia, código esperado (null = não é e-mail de código)]
 const CASES = [
@@ -56,6 +56,10 @@ test("sameSite: remetente diferente não bate (site falso)", () => {
   // e-mail pessoal não passa por empresa: qualquer um cria conta no Gmail
   assert.ok(!sameSite("golpista@gmail.com", "accounts.google.com"));
   assert.ok(!sameSite("golpista@outlook.com", "login.microsoftonline.com"));
+  // hospedagem compartilhada: subdomínio de outro dono não é a mesma empresa
+  assert.ok(!sameSite("noreply@app-da-vitima.firebaseapp.com", "evil.firebaseapp.com"));
+  assert.ok(!sameSite("bot@vitima.github.io", "evil.github.io"));
+  assert.ok(sameSite("noreply@app.firebaseapp.com", "app.firebaseapp.com"));
 });
 
 test("decode: entidade fora do Unicode não derruba a leitura", () => {
@@ -84,6 +88,30 @@ test("parseFeed: lê entradas, decodifica entidades e data", () => {
   assert.equal(b.email, "ana@gmail.com");
   assert.equal(b.issued, Date.parse("2026-11-20T14:00:00Z"));
   assert.equal(senderLabel(a), "YouTube");
+});
+
+test("gmailLink: só aceita mail.google.com e força https", () => {
+  assert.equal(gmailLink("http://mail.google.com/mail?account_id=a&message_id=1&view=conv"), "https://mail.google.com/mail?account_id=a&message_id=1&view=conv");
+  assert.equal(gmailLink("https://evil.io/mail.google.com"), "");
+  assert.equal(gmailLink("javascript:alert(1)"), "");
+  assert.equal(gmailLink(""), "");
+});
+
+test("feedAccount: lê a conta do título do feed", () => {
+  assert.equal(feedAccount("<feed><title>Gmail - Inbox for Ana@Gmail.com</title>"), "ana@gmail.com");
+  assert.equal(feedAccount("<feed><title>Gmail - Caixa de entrada</title>"), "");
+});
+
+test("isMagicLink: e-mails de entrar sem senha", () => {
+  assert.ok(isMagicLink("Seu link de acesso ao Notion", "Clique aqui para entrar."));
+  assert.ok(isMagicLink("Sign in to Slack", "Click here to sign in with this magic link."));
+  assert.ok(isMagicLink("Confirme seu e-mail", "Falta pouco!"));
+  assert.ok(!isMagicLink("Promoção de Black Friday", "Até 70% off em tudo."));
+});
+
+test("parseFeed: link do e-mail vem limpo", () => {
+  const [a] = parseFeed(FEED.replace("<issued>", '<link rel="alternate" href="http://mail.google.com/mail?account_id=x&amp;message_id=9&amp;view=conv" type="text/html" /><issued>'));
+  assert.equal(a.link, "https://mail.google.com/mail?account_id=x&message_id=9&view=conv");
 });
 
 test("parseFeed: página de login não é feed", () => {

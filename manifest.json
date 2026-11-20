@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "G-Colou",
-  "version": "0.1.0",
-  "description": "Mostra o código de verificação do Gmail num card ao lado da página. Clique e copie. 100% local.",
+  "name": "__MSG_extName__",
+  "version": "0.2.0",
+  "description": "__MSG_extDesc__",
   "minimum_chrome_version": "116",
   "permissions": [
     "storage",
@@ -46,5 +46,6 @@
     "128": "icons/icon128.png"
   },
   "author": "Vitor Macedo",
-  "homepage_url": "https://github.com/codeveagah/g-colou"
+  "homepage_url": "https://github.com/codeveagah/g-colou",
+  "default_locale": "pt_BR"
 }

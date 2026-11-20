@@ -14,7 +14,11 @@ Você pede um código de verificação em qualquer site (Spotify, Discord, Micro
 > **482913**
 > de Spotify · clique para copiar
 
-- **Clique** no card: o código vai para a área de transferência.
+- **Card de vidro** (estilo Liquid Glass do iPhone): aparece compacto e abre ao passar o mouse.
+- **Clique** no card ou em **Copiar**: o código vai para a área de transferência.
+- **Preencher:** coloca o código direto no campo da página (só aparece quando o e-mail é do próprio site).
+- **Link de acesso** ("entrar sem senha"): o card mostra **Abrir e-mail** e abre aquele e-mail no Gmail.
+- **Várias contas:** lê todas as contas do Gmail logadas no Chrome (até 5) e mostra de qual conta veio.
 - **Arraste** o card pelo ✥ para onde quiser; ele lembra o lugar.
 - **Borda laranja:** o código veio de uma empresa diferente do site aberto. Confira antes de usar (pode ser site falso). Precisa de dois cliques para copiar.
 - Código **copiado ou fechado** não aparece de novo.
@@ -47,12 +51,17 @@ Clique no ícone do G-Colou:
 - **Seu nome** (aparece no card)
 - **Copiar automaticamente** (desligado por padrão; só copia sozinho se o remetente bate com o site)
 - **Posicionar na tela:** mostra um card de exemplo na página para você arrastar até o lugar padrão
+- **Todas as contas do Gmail** (ligado por padrão)
 - **Lado da tela** (esquerda ou direita)
+
+Idioma: português ou inglês, conforme o idioma do Chrome.
 
 ## Limites
 
-- Lê só a conta principal do Gmail no Chrome (`/u/0`), só a caixa de entrada e só e-mails **não lidos** dos últimos 5 minutos. Se você abrir o e-mail antes, o card não aparece.
+- Lê só a caixa de entrada e só e-mails **não lidos** dos últimos 5 minutos. Se você abrir o e-mail antes, o card não aparece.
 - Usa a prévia do e-mail (~200 caracteres). Código no fim de e-mail longo pode não ser achado.
+- Link de acesso: o feed não traz o link de dentro do e-mail, então o card abre o e-mail (não o link direto).
+- Conta de empresa (Google Workspace) pode ter o feed bloqueado pelo administrador.
 - O feed Atom do Gmail não é oficial: o Google pode mudar ou desligar.
 - Só roda em sites `https://`.
 
@@ -65,8 +74,12 @@ src/lib.js          lê o feed, acha o código, compara remetente com o site
 src/background.js   service worker: lê o Gmail e entrega o código à aba
 src/content.js      card na página (arrastar, copiar, posição)
 src/options.*       menu de opções
+_locales/           textos em português e inglês
+dev/                prévias locais do card e do menu (sem extensão)
 test/lib.test.js    testes (node --test)
 ```
+
+Para ver o visual sem instalar: rode um servidor estático na pasta (ex.: `npx serve .`) e abra `dev/preview.html` ou `dev/options-preview.html`.
 
 Mudou algo? Rode os testes e clique no ↻ do G-Colou em `chrome://extensions`:
 
