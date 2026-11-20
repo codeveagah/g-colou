@@ -4,6 +4,15 @@
 
 <p align="center">Chegou código de verificação no Gmail? Ele aparece num card no canto da página. Um clique e está copiado.<br>Sem abrir o Gmail. <b>100% local.</b></p>
 
+<p align="center">
+  <img src="docs/images/01-capa.png" width="49%" alt="G-Colou: o código do Gmail aparece na tela. Um clique e pronto.">
+  <img src="docs/images/02-card-na-pagina.png" width="49%" alt="Card de vidro com o código sobre a página de login">
+</p>
+<p align="center">
+  <img src="docs/images/03-preencher-copiar.png" width="49%" alt="Card com os botões Preencher e Copiar">
+  <img src="docs/images/04-local-e-aberto.png" width="49%" alt="100% local, sem servidor e código aberto">
+</p>
+
 ---
 
 ## O que faz
