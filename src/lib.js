@@ -31,9 +31,34 @@ export function parseFeed(xml) {
       issued: Date.parse(tag(e, "issued") || tag(e, "modified")) || 0,
       name: tag(author, "name"),
       email: tag(author, "email").toLowerCase(),
+      link: gmailLink(decode(e.match(/<link[^>]*href="([^"]+)"/)?.[1] ?? "")),
     };
   });
 }
+
+/** Conta dona do feed: "Gmail - Inbox for ana@gmail.com" → "ana@gmail.com". */
+export function feedAccount(xml) {
+  const head = xml.split("<entry>")[0]; // título do feed, nunca o assunto de um e-mail
+  return (head.match(/<title>[^<]*?([\w.+-]+@[\w.-]+)<\/title>/)?.[1] ?? "").toLowerCase();
+}
+
+/** Só aceita link do próprio Gmail (o feed traz http://; vira https://). Qualquer outro vira "". */
+export function gmailLink(href) {
+  try {
+    const u = new URL(href);
+    if (u.hostname !== "mail.google.com" || !/^https?:$/.test(u.protocol)) return "";
+    u.protocol = "https:";
+    return u.href;
+  } catch {
+    return "";
+  }
+}
+
+// e-mail de "entrar sem senha": o feed não traz o link de dentro do e-mail, então o card abre o e-mail
+const MAGIC =
+  /link (de |para )?(acesso|login|entrar)|magic link|sign[- ]?in link|log[- ]?in link|clique (aqui )?para (entrar|acessar|fazer login|confirmar)|click (here |below )?to (sign|log) ?in|confirm (your )?(e-?mail|sign[- ]?in)|confirme (seu )?e-?mail/i;
+
+export const isMagicLink = (title, summary) => MAGIC.test(`${title} \n ${summary}`);
 
 // Só procura código perto destas palavras; evita pegar nº de pedido, cupom e protocolo.
 const KEYWORD =
@@ -68,8 +93,17 @@ export function extractCode(title, summary) {
 // sufixos de dois níveis comuns (ex.: nubank.com.br)
 const SECOND_LEVEL = new Set(["com", "net", "org", "gov", "edu", "co", "ac", "ne", "or"]);
 
+// hospedagem compartilhada: cada subdomínio é de um dono diferente (evil.firebaseapp.com ≠ vitima.firebaseapp.com)
+const SHARED = new Set([
+  "firebaseapp.com", "web.app", "appspot.com", "github.io", "gitlab.io", "vercel.app", "netlify.app", "pages.dev",
+  "workers.dev", "herokuapp.com", "onrender.com", "fly.dev", "glitch.me", "repl.co", "surge.sh", "ngrok.io",
+  "ngrok-free.app", "azurewebsites.net", "cloudfront.net", "amazonaws.com", "blogspot.com", "wordpress.com",
+  "weebly.com", "wixsite.com", "carrd.co", "itch.io", "tumblr.com", "notion.site",
+]);
+
 export function baseDomain(host) {
   const parts = host.toLowerCase().replace(/\.$/, "").split(".");
+  if (parts.length > 2 && SHARED.has(parts.slice(-2).join("."))) return parts.slice(-3).join(".");
   if (parts.length > 2 && parts.at(-1).length === 2 && SECOND_LEVEL.has(parts.at(-2))) return parts.slice(-3).join(".");
   return parts.slice(-2).join(".");
 }
@@ -98,7 +132,7 @@ export function sameSite(senderEmail, pageHost) {
 /** Domínio de quem mandou: "spotify.com". */
 export function senderDomain(email) {
   const at = email.lastIndexOf("@");
-  return at < 0 ? "" : baseDomain(email.slice(at + 1));
+  return at < 0 ? "" : baseDomain(email.slice(at + 1).replace(/\p{Cf}/gu, ""));
 }
 
 /** Nome curto do remetente para o card: "YouTube", "Spotify". */

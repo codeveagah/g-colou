@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>G-Colou · prévia do card</title>
+    <style>
+      /* fundo colorido para enxergar o vidro (desfoque e refração) */
+      body { margin: 0; min-height: 100vh; font: 16px system-ui, sans-serif; color: #222;
+        background: radial-gradient(circle at 75% 15%, #ffb36b 0 120px, transparent 121px),
+          radial-gradient(circle at 92% 30%, #4fb3ff 0 90px, transparent 91px),
+          linear-gradient(120deg, #f6f3ee, #e9eef6); }
+      main { max-width: 520px; padding: 48px; }
+      h1 { font-size: 40px; line-height: 1.1; }
+      .stripes { position: fixed; top: 0; right: 0; width: 420px; height: 260px;
+        background: repeating-linear-gradient(90deg, #111 0 14px, #fff 14px 28px); opacity: 0.85; z-index: -1; }
+    </style>
+  </head>
+  <body>
+    <div class="stripes"></div>
+    <main>
+      <h1>Página de exemplo com campo de código</h1>
+      <p>Prévia local do card do G-Colou, sem extensão: o <code>chrome</code> abaixo é falso.</p>
+      <label>Código de verificação <input id="otp" name="otp" autocomplete="one-time-code" /></label>
+    </main>
+    <script>
+      // chrome falso: devolve códigos de exemplo uma vez
+      const MSG = { listLabel: "Códigos", hi: "Chegou seu código", hiName: "$1, chegou seu código", hiLink: "Link de acesso",
+        hiLinkName: "$1, chegou seu link de acesso", from: "de $1", account: "conta $1", copy: "Copiar", fill: "Preencher",
+        openMail: "Abrir e-mail", copied: "Copiado ✓", filled: "Preenchido ✓", warn: "Veio de $1, diferente deste site. Confira antes de usar.",
+        otherSite: "outro site", close: "Fechar", move: "Mover", copyLabel: "Copiar código $1 de $2", confirmCopy: "Clique de novo para copiar mesmo assim" };
+      let sent = false;
+      const opts = { side: "right", pos: null, name: "Vitor" };
+      window.chrome = {
+        i18n: { getMessage: (k, s = []) => (MSG[k] || "").replace(/\$(\d)/g, (_, n) => s[n - 1] ?? "") },
+        storage: { sync: { get: async (d) => ({ ...d, ...opts }), set: async () => {} } },
+        runtime: {
+          id: "preview",
+          onMessage: { addListener() {} },
+          sendMessage: async (m) => {
+            if (m.type !== "tick" || sent) return { codes: [], opts };
+            sent = true;
+            return { opts, codes: [
+              { id: "1", kind: "code", code: "139858", from: "Spotify", match: true },
+              { id: "2", kind: "link", from: "Notion", match: true },
+              { id: "3", kind: "code", code: "482913", from: "Google", match: false, domain: "google.com", account: "trabalho@empresa.com" },
+            ] };
+          },
+        },
+      };
+    </script>
+    <script src="../src/content.js"></script>
+  </body>
+</html>

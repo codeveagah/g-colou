@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>G-Colou · prévia do menu</title>
+<script>
+  // prévia local do menu sem extensão: chrome falso + mensagens reais de _locales
+  (async () => {
+    const lang = new URLSearchParams(location.search).get("lang") || "pt_BR";
+    const msgs = await (await fetch(`../_locales/${lang}/messages.json`)).json();
+    const store = {};
+    window.chrome = {
+      i18n: {
+        getMessage: (k, s = []) => (msgs[k]?.message ?? "").replace(/\$(\d)/g, (_, n) => s[n - 1] ?? ""),
+        getUILanguage: () => lang.replace("_", "-"),
+      },
+      storage: { sync: { get: async (d) => ({ ...d, ...store }), set: async (p) => Object.assign(store, p) } },
+      tabs: { query: async () => [{ id: 1 }], sendMessage: async () => { throw new Error("sem aba"); } },
+    };
+    const html = await (await fetch("../src/options.html")).text();
+    document.open();
+    document.write(html.replace('src="options.js"', 'src="../src/options.js"'));
+    document.close();
+  })();
+</script>

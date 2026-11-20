@@ -1,0 +1,152 @@
+{
+  "extName": {
+    "message": "G-Colou"
+  },
+  "extDesc": {
+    "message": "Mostra o código de verificação do Gmail num card ao lado da página. Clique e copie. 100% local."
+  },
+  "badgeLogin": {
+    "message": "G-Colou: entre no Gmail neste Chrome"
+  },
+  "listLabel": {
+    "message": "Códigos de verificação"
+  },
+  "hi": {
+    "message": "Chegou seu código"
+  },
+  "hiName": {
+    "message": "$1, chegou seu código"
+  },
+  "hiLink": {
+    "message": "Link de acesso"
+  },
+  "hiLinkName": {
+    "message": "$1, chegou seu link de acesso"
+  },
+  "from": {
+    "message": "de $1"
+  },
+  "account": {
+    "message": "conta $1"
+  },
+  "copy": {
+    "message": "Copiar"
+  },
+  "fill": {
+    "message": "Preencher"
+  },
+  "openMail": {
+    "message": "Abrir e-mail"
+  },
+  "copied": {
+    "message": "Copiado ✓"
+  },
+  "filled": {
+    "message": "Preenchido ✓"
+  },
+  "copyFail": {
+    "message": "Não consegui copiar, selecione o código"
+  },
+  "confirmCopy": {
+    "message": "Clique de novo para copiar mesmo assim"
+  },
+  "warn": {
+    "message": "Veio de $1, diferente deste site. Confira antes de usar."
+  },
+  "otherSite": {
+    "message": "outro site"
+  },
+  "close": {
+    "message": "Fechar"
+  },
+  "move": {
+    "message": "Mover o card (arraste ou use as setas)"
+  },
+  "copyLabel": {
+    "message": "Copiar código $1 de $2"
+  },
+  "demoHi": {
+    "message": "Exemplo: arraste pelo ✥ até onde quiser"
+  },
+  "demoFrom": {
+    "message": "solte para salvar · clique para fechar"
+  },
+  "optSub": {
+    "message": "Código do Gmail num clique"
+  },
+  "optLocal": {
+    "message": "100% local"
+  },
+  "optLocalTip": {
+    "message": "Nenhum e-mail sai deste navegador"
+  },
+  "optPreview": {
+    "message": "Prévia do card"
+  },
+  "optEnabled": {
+    "message": "Ligado"
+  },
+  "optEnabledSub": {
+    "message": "Mostra o card quando chega código no Gmail"
+  },
+  "optYou": {
+    "message": "Você"
+  },
+  "optName": {
+    "message": "Seu nome"
+  },
+  "optNameSub": {
+    "message": "Aparece no card: “Vitor, chegou seu código”"
+  },
+  "optNamePh": {
+    "message": "Ex.: Vitor"
+  },
+  "optBehavior": {
+    "message": "Comportamento"
+  },
+  "optAuto": {
+    "message": "Copiar automaticamente"
+  },
+  "optAutoSub": {
+    "message": "Só de quem bate com o site aberto. Os outros pedem clique."
+  },
+  "optAll": {
+    "message": "Todas as contas do Gmail"
+  },
+  "optAllSub": {
+    "message": "Lê todas as contas logadas neste Chrome, não só a principal."
+  },
+  "optPlace": {
+    "message": "Posição do card"
+  },
+  "optPlaceSub": {
+    "message": "Mostra um card de exemplo na página aberta. Arraste até onde quiser: vira o padrão."
+  },
+  "optPlaceBtn": {
+    "message": "Posicionar"
+  },
+  "optPlaceErr": {
+    "message": "Abra um site (https://...) nesta aba, recarregue a página e tente de novo."
+  },
+  "optSide": {
+    "message": "Lado da tela"
+  },
+  "optSideSub": {
+    "message": "Escolher um lado tira a posição arrastada."
+  },
+  "optLeft": {
+    "message": "Esquerda"
+  },
+  "optRight": {
+    "message": "Direita"
+  },
+  "optSaved": {
+    "message": "Salvo ✓"
+  },
+  "optFooter": {
+    "message": "Lê só e-mails não lidos dos últimos 5 min. Nada sai do seu navegador."
+  },
+  "optCredit": {
+    "message": "Criado por"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "extName": {
+    "message": "G-Colou"
+  },
+  "extDesc": {
+    "message": "Shows your Gmail verification code in a card next to the page. Click to copy. 100% local."
+  },
+  "badgeLogin": {
+    "message": "G-Colou: sign in to Gmail in this Chrome"
+  },
+  "listLabel": {
+    "message": "Verification codes"
+  },
+  "hi": {
+    "message": "Your code is here"
+  },
+  "hiName": {
+    "message": "$1, your code is here"
+  },
+  "hiLink": {
+    "message": "Sign-in link"
+  },
+  "hiLinkName": {
+    "message": "$1, your sign-in link is here"
+  },
+  "from": {
+    "message": "from $1"
+  },
+  "account": {
+    "message": "account $1"
+  },
+  "copy": {
+    "message": "Copy"
+  },
+  "fill": {
+    "message": "Fill in"
+  },
+  "openMail": {
+    "message": "Open email"
+  },
+  "copied": {
+    "message": "Copied ✓"
+  },
+  "filled": {
+    "message": "Filled in ✓"
+  },
+  "copyFail": {
+    "message": "Couldn't copy, select the code"
+  },
+  "confirmCopy": {
+    "message": "Click again to copy anyway"
+  },
+  "warn": {
+    "message": "Sent by $1, not this site. Check before using it."
+  },
+  "otherSite": {
+    "message": "another site"
+  },
+  "close": {
+    "message": "Close"
+  },
+  "move": {
+    "message": "Move the card (drag or use arrow keys)"
+  },
+  "copyLabel": {
+    "message": "Copy code $1 from $2"
+  },
+  "demoHi": {
+    "message": "Example: drag the ✥ wherever you want"
+  },
+  "demoFrom": {
+    "message": "release to save · click to close"
+  },
+  "optSub": {
+    "message": "Gmail codes in one click"
+  },
+  "optLocal": {
+    "message": "100% local"
+  },
+  "optLocalTip": {
+    "message": "No email leaves this browser"
+  },
+  "optPreview": {
+    "message": "Card preview"
+  },
+  "optEnabled": {
+    "message": "On"
+  },
+  "optEnabledSub": {
+    "message": "Shows the card when a code arrives in Gmail"
+  },
+  "optYou": {
+    "message": "You"
+  },
+  "optName": {
+    "message": "Your name"
+  },
+  "optNameSub": {
+    "message": "Shown on the card: “Vitor, your code is here”"
+  },
+  "optNamePh": {
+    "message": "E.g. Vitor"
+  },
+  "optBehavior": {
+    "message": "Behavior"
+  },
+  "optAuto": {
+    "message": "Copy automatically"
+  },
+  "optAutoSub": {
+    "message": "Only from the site you're on. Others need a click."
+  },
+  "optAll": {
+    "message": "All Gmail accounts"
+  },
+  "optAllSub": {
+    "message": "Reads every account signed in to this Chrome, not just the main one."
+  },
+  "optPlace": {
+    "message": "Card position"
+  },
+  "optPlaceSub": {
+    "message": "Shows a sample card on the open page. Drag it anywhere: that becomes the default."
+  },
+  "optPlaceBtn": {
+    "message": "Position"
+  },
+  "optPlaceErr": {
+    "message": "Open a site (https://...) in this tab, reload it and try again."
+  },
+  "optSide": {
+    "message": "Screen side"
+  },
+  "optSideSub": {
+    "message": "Picking a side resets the dragged position."
+  },
+  "optLeft": {
+    "message": "Left"
+  },
+  "optRight": {
+    "message": "Right"
+  },
+  "optSaved": {
+    "message": "Saved ✓"
+  },
+  "optFooter": {
+    "message": "Reads only unread emails from the last 5 min. Nothing leaves your browser."
+  },
+  "optCredit": {
+    "message": "Made by"
+  }
+}
