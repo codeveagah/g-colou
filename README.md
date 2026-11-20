@@ -30,12 +30,20 @@ A extensão lê o feed do Gmail (`mail.google.com/mail/feed/atom`) com o login q
 - Guarda só os ids dos e-mails já vistos (para não repetir) e as suas opções.
 - O código fica na memória por 2 minutos e nunca é gravado em disco.
 
+## Requisitos
+
+- **Navegador:** Google Chrome 116 ou mais novo. Também roda em navegadores baseados no Chromium (Edge, Brave, Opera), instalando do mesmo jeito.
+- **Sistema:** qualquer um em que o Chrome atual roda: Windows 10 ou 11, macOS 12 (Monterey) ou mais novo, Linux.
+- **Não roda** no Windows 7/8 nem em macOS antigo: o Chrome parou de atualizar neles e ficou abaixo da versão 116.
+- **Gmail** logado no mesmo Chrome.
+
 ## Como instalar
 
-1. Baixe: botão verde **Code → Download ZIP** e descompacte numa pasta que você não vai apagar.
+1. Baixe o **[g-colou.zip da última versão](https://github.com/codeveagah/g-colou/releases/latest/download/g-colou.zip)** e descompacte numa pasta que você não vai apagar.
+   (Ou, para mexer no código: `git clone https://github.com/codeveagah/g-colou.git`.)
 2. No Chrome, abra `chrome://extensions`.
 3. Ligue o **Modo do desenvolvedor** (canto superior direito).
-4. Clique em **Carregar sem compactação** e escolha a pasta que tem o `manifest.json`.
+4. Clique em **Carregar sem compactação** (no macOS, "Load unpacked") e escolha a pasta que tem o `manifest.json`.
 5. Fixe o G-Colou no ícone de quebra-cabeça da barra.
 6. Esteja logado no Gmail neste Chrome. Pronto.
 
