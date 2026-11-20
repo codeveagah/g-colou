@@ -93,7 +93,7 @@
     document.documentElement.append(host);
   }
 
-  function show({ id, code, from, match, domain }, opts) {
+  function show({ id, code, from, match, domain, demo }, opts) {
     mount(opts);
     const warn = `Veio de ${domain || "outro site"}, diferente deste site. Confira antes de usar.`;
     const card = document.createElement("div");
@@ -109,20 +109,21 @@
     mv.addEventListener("keydown", nudge);
     // textContent em tudo: nada do e-mail vira HTML
     const name = opts.name?.trim();
-    card.querySelector(".hi").textContent = name ? `${name}, chegou seu código` : "Chegou seu código";
+    card.querySelector(".hi").textContent = demo ? "Exemplo: arraste pelo ✥ até onde quiser" : name ? `${name}, chegou seu código` : "Chegou seu código";
     card.querySelector(".code").textContent = code;
     const label = card.querySelector(".from");
-    const fromText = `de ${from} · clique para copiar`;
+    const fromText = demo ? "solte para salvar · clique para fechar" : `de ${from} · clique para copiar`;
     label.textContent = fromText;
     if (!match) card.querySelector(".w").textContent = warn;
 
-    const used = () => chrome.runtime.sendMessage({ type: "done", id }).catch(() => {});
+    const used = () => demo || chrome.runtime.sendMessage({ type: "done", id }).catch(() => {});
     const close = () => {
       card.remove();
       if (box && !box.children.length) (host?.remove(), (host = null), (box = null));
     };
     let armed = match; // remetente diferente: 1º clique só arma, 2º copia (página não copia por clique escondido)
     const copy = async () => {
+      if (demo) return close();
       if (!armed) {
         armed = true;
         label.textContent = "Clique de novo para copiar mesmo assim";
@@ -146,6 +147,14 @@
     box.prepend(card);
     setTimeout(close, SHOW_FOR);
   }
+
+  // botão "Posicionar na tela" do menu: card de exemplo para arrastar até o lugar padrão
+  chrome.runtime.onMessage.addListener((msg, sender) => {
+    if (sender.id !== chrome.runtime.id || msg?.type !== "place") return;
+    chrome.storage.sync.get({ side: "right", pos: null, name: "" }).then((opts) =>
+      show({ id: "demo", code: "123456", from: "G-Colou", match: true, demo: true }, opts),
+    );
+  });
 
   let timer = 0;
   let fastUntil = Date.now() + FAST_FOR;

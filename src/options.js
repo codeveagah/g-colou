@@ -9,6 +9,17 @@ async function save(patch) {
   Object.assign(opts, patch);
   await chrome.storage.sync.set(patch);
   render();
+
+// manda a aba aberta mostrar o card de exemplo; o content script só existe em site https
+$("place").addEventListener("click", async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  try {
+    await chrome.tabs.sendMessage(tab.id, { type: "place" });
+    window.close(); // fecha o menu para liberar a página
+  } catch {
+    $("placeHint").textContent = "Abra um site (https://...) nesta aba, recarregue a página e tente de novo.";
+  }
+});
   saved.textContent = "Salvo ✓";
   clearTimeout(hideSaved);
   hideSaved = setTimeout(() => (saved.textContent = ""), 1200);
@@ -34,7 +45,29 @@ let typing = 0;
 $("name").addEventListener("input", (e) => {
   opts.name = e.target.value;
   render();
+
+// manda a aba aberta mostrar o card de exemplo; o content script só existe em site https
+$("place").addEventListener("click", async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  try {
+    await chrome.tabs.sendMessage(tab.id, { type: "place" });
+    window.close(); // fecha o menu para liberar a página
+  } catch {
+    $("placeHint").textContent = "Abra um site (https://...) nesta aba, recarregue a página e tente de novo.";
+  }
+});
   clearTimeout(typing); // grava depois que a pessoa para de digitar (limite de escrita do storage.sync)
   typing = setTimeout(() => save({ name: e.target.value.trim().slice(0, 24) }), 500);
 });
 render();
+
+// manda a aba aberta mostrar o card de exemplo; o content script só existe em site https
+$("place").addEventListener("click", async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  try {
+    await chrome.tabs.sendMessage(tab.id, { type: "place" });
+    window.close(); // fecha o menu para liberar a página
+  } catch {
+    $("placeHint").textContent = "Abra um site (https://...) nesta aba, recarregue a página e tente de novo.";
+  }
+});
